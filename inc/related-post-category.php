@@ -17,15 +17,16 @@ if ($categories) {
 
     $my_query = new wp_query( $args );
     if( $my_query->have_posts() ) {
-        echo '<div id="related_posts"><h3>Related Posts</h3><div class="row">';
+        echo '<div id="related_posts"><h3><span>Related Posts</span></h3><div class=" owl-carousel carousel-col-4">';
         while( $my_query->have_posts() ) {
             $my_query->the_post();?>
 
-            <div class="related-post col-lg-<?php echo 12/$args['posts_per_page'] ?> col-sm-12"><div class="relatedthumb"><a href="<?php the_permalink()?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_post_thumbnail(); ?></a></div>
-                <div class="relatedcontent">
-                    <h3><a href="<?php the_permalink()?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
-                    <?php the_time('M j, Y') ?>
+            <div class="related-post">
+                <div class="related-post-thumb">
+                    <a href="<?php the_permalink()?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_post_thumbnail(); ?></a>
+                    <span class="related-post-date"><?php the_time('M j, Y') ?></span>
                 </div>
+                <p class="related-post-title"><a href="<?php the_permalink()?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_title(); ?></a></p>
             </div>
             <?php
         }
