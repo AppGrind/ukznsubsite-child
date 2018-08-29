@@ -11,18 +11,14 @@ function ukzn_customizer_controls() {
 add_action( 'customize_controls_enqueue_scripts', 'ukzn_customizer_controls' );
 
 function enqueue_child_main_style(){
-    wp_enqueue_style('bootstrap-extra-styles', get_stylesheet_directory_uri().'/css/bootstrap.extra.min.css', false);
-    wp_enqueue_style('owlcarousel-min-css', get_stylesheet_directory_uri() . '/lib/OwlCarousel2/assets/owl.carousel.min.css', false);
-    wp_enqueue_style('datatables-min-css', get_stylesheet_directory_uri().'/lib/datatables.min.css', false);
-    wp_enqueue_style('simple-line-icons', 'https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css', false);
-    
     wp_enqueue_style('child-style', get_stylesheet_directory_uri().'/css/child.css', false);
+    wp_enqueue_style('child-style', get_stylesheet_directory_uri().'/lib/dataTables.min.css', false);
+    wp_enqueue_style('simple-line-icons', 'https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css', false);
 }
 
 function ukznsubsite_child_queue_custom_scripts() {
-    wp_enqueue_script( 'owlcarousel-min-js', get_stylesheet_directory_uri() . '/lib/OwlCarousel2/owl.carousel.min.js', array( 'jquery' ), '2018.05.04', true );
-    wp_enqueue_script( 'datatables-min-js', get_stylesheet_directory_uri() . '/lib/datatables.min.js', array( 'jquery' ), '2018.05.04', true );
-    wp_enqueue_script( 'scripts-init-js', get_stylesheet_directory_uri() . '/js/scripts.init.js', array( 'jquery' ), '2018.05.04', true );
+    wp_enqueue_script( 'customizer-controls', get_stylesheet_directory_uri() . '/lib/dataTables.min.js', array( 'jquery' ), '20170412', true );
+    wp_enqueue_script( 'customizer-controls', get_stylesheet_directory_uri() . '/js/dataTables.init.js', array( 'jquery' ), '20170412', true );
 }
 add_action( 'wp_enqueue_scripts', 'ukznsubsite_child_queue_custom_scripts' );
 
@@ -67,15 +63,15 @@ add_action('after_setup_theme', 'remove_parent_filters');
         // Hide category and tag text for pages.
         if ( 'post' == get_post_type() ) {
             /* translators: used between list items, there is a space after the comma */
-            $categories_list = get_the_category_list( __( ' ', 'understrap' ) );
+            $categories_list = get_the_category_list( __( ', ', 'understrap' ) );
             if ( $categories_list && understrap_categorized_blog() ) {
-                printf( '<p class="cat-links mr-2"><span>Categories</span> ' . __( '%1$s', 'understrap' ) . '</p>', $categories_list );
+                printf( '<span class="cat-links mr-2"><i class="fa fa-folder-open-o"></i> ' . __( '%1$s', 'understrap' ) . '</span>', $categories_list );
             }
 
             /* translators: used between list items, there is a space after the comma */
             $tags_list = get_the_tag_list( '', __( ', ', 'understrap' ) );
             if ( $tags_list ) {
-                printf( '<p class="tags-links"><span>Tags</span> ' . __( '%1$s', 'understrap' ) . '</p>', $tags_list );
+                printf( '<span class="tags-links"><i class="fa fa-tags"></i> ' . __( '%1$s', 'understrap' ) . '</span>', $tags_list );
             }
         }
 
